@@ -11,3 +11,46 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.site-layout-content {
+  background: #fff;
+  padding: 24px;
+  min-height: 280px;
+  height: 100vh;
+}
+
+.ant-layout {
+  height: 100%;
+}
+
+/* .logo {
+  width: 120px;
+  height: 31px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 16px 24px 16px 0;
+  float: left;
+} */
+
+.login-form {
+  max-width: 300px;
+  width: 100%;
+  margin: 10rem auto !important;
+}
+
+.register-form {
+  max-width: 500px;
+  width: 100%;
+  margin: 3rem auto !important;
+}
+
+.login-form-forgot {
+  float: right;
+}
+
+.ant-col-rtl .login-form-forgot {
+  float: left;
+}
+
+.login-form-button {
+  width: 100%;
+}
