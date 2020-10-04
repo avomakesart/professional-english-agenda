@@ -27,7 +27,7 @@ export const Login = () => {
     authService
       .login(username, password)
       .then(() => {
-        history.push("/");
+        history.push("/perfil");
         window.location.reload();
       })
       .catch((error) => {
