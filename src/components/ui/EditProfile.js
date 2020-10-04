@@ -4,6 +4,9 @@ import { Link } from "react-router-dom";
 import { useForm } from "../../hooks/useForm";
 import { QuestionCircleOutlined } from "@ant-design/icons";
 import { Form, Input, Tooltip, Checkbox, Button, Modal, Result } from "antd";
+import authService from "../../services/auth-service";
+
+const USER_API = process.env.REACT_APP_API_USER_INFO;
 
 const formItemLayout = {
   labelCol: {
@@ -49,33 +52,28 @@ export const EditProfile = ({ profile }) => {
 
   const { fullname, username, email, password, confirmPassword } = formInput;
 
+  const currentUser = authService.getCurrentUser();
+
   const checkBox = () => {
     return setChecked(!checked);
   };
 
-  const handleUpdate = (e) => {
-    e.preventDefault();
-    setSuccessful(false);
-    axios
-      .put(fullname, username, email, password)
-      .then((response) => {
-        setSuccessful(true);
-        Modal.success({ title: response.data.message });
-      })
-      .catch((error) => {
-        const resMessage =
-          (error.response &&
-            error.response.data &&
-            error.response.data.message) ||
-          error.message ||
-          error.toString();
+  console.log(currentUser.id);
 
-        setSuccessful(false);
-        Modal.error({
-          title: "Algo salio mal, mensaje:",
-          content: resMessage,
-        });
+  const onSubmit = async () => {
+    try {
+      const resp = await axios.put(USER_API + currentUser.id, {
+        fullname,
+        username,
+        email,
+        password,
       });
+      const dataResp = await resp.data;
+      setSuccessful(dataResp);
+      Modal.success({ title: dataResp });
+    } catch (error) {
+      Modal.error({ title: error.message });
+    }
   };
 
   return (
@@ -85,7 +83,7 @@ export const EditProfile = ({ profile }) => {
           {...formItemLayout}
           name="register"
           className="register-form"
-          onSubmit={handleUpdate}
+          onSubmitCapture={onSubmit}
           scrollToFirstError
         >
           <Form.Item
@@ -247,12 +245,12 @@ export const EditProfile = ({ profile }) => {
             password.length > 5 &&
             confirmPassword === password &&
             checked ? (
-              <Button type="primary" htmlType="submit" onClick={handleUpdate}>
-                Registrar
+              <Button type="primary" htmlType="submit" onSubmit={onSubmit}>
+                Editar Perfil
               </Button>
             ) : (
               <Button type="ghost" htmlType="button" disabled>
-                Registrar
+                Editar Perfil
               </Button>
             )}
           </Form.Item>
@@ -261,14 +259,14 @@ export const EditProfile = ({ profile }) => {
       {successful && (
         <Result
           status="success"
-          title="El usuario se registro correctamente"
+          title="El usuario se actualizo correctamente"
           subTitle="Selecciona una opcion en los botones de abajo."
           extra={[
             <Button type="primary" key="session">
-              <Link to="/iniciar-sesion">Iniciar Sesión</Link>
+              <Link to="/">Ir al inicio</Link>
             </Button>,
             <Button key="home">
-              <Link to="/">Ir al Inicio</Link>
+              <Link to="/perfil">Ir a mi perfil</Link>
             </Button>,
           ]}
         />
