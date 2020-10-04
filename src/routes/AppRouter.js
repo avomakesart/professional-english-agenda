@@ -1,10 +1,11 @@
 import React from "react";
-import { BrowserRouter as Router, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Login } from "../components/auth/Login";
 import { Register } from "../components/auth/Register";
 import { AddClient } from "../components/AddClient";
 import { Profile } from "../components/ui/Profile";
 import { Home } from "../components/Home";
+import {Error } from "../components/ui/Error"
 import authService from "../services/auth-service";
 import PublicRoute from "./PublicRoute";
 import PrivateRoute from "./PrivateRoute";
@@ -45,6 +46,8 @@ export default function AppRouter() {
             component={Profile}
             isAuthenticated={!!currentUser}
           />
+
+<Route exact path="*" component={Error} />
         </Switch>
       </Router>
     </>
