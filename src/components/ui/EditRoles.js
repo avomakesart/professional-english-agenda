@@ -53,7 +53,12 @@ export const EditRoles = ({ userId }) => {
         Editar
       </Button>
       {openMenu && (
-        <Modal visible={openMenu} onOk={handleClose} onCancel={handleClose}>
+        <Modal
+          visible={openMenu}
+          onOk={handleClose}
+          onCancel={handleClose}
+          title="Actualiza el rol de usuario"
+        >
           <Form
             labelCol={{ span: 4 }}
             wrapperCol={{ span: 14 }}
@@ -61,7 +66,7 @@ export const EditRoles = ({ userId }) => {
             size="large"
             onSubmitCapture={onSubmit}
           >
-            <Form.Item label="Actualiza el rol de usuario">
+            <Form.Item>
               <Select onChange={setRoleId} value={roleId}>
                 <Select.Option value={1}>Usuario</Select.Option>
                 <Select.Option value={2}>Moderador</Select.Option>

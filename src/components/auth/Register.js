@@ -114,7 +114,7 @@ export const Register = () => {
   };
 
   return (
-    <LayoutContent bread="Inciar Sesión" selected="3">
+    <LayoutContent bread="Registrarse" selected="3">
       {!successful && (
         <Form
           {...formItemLayout}

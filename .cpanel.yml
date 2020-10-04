@@ -1,0 +1,4 @@
+deployment:
+tasks:
+    – export DEPLOYPATH=/home/agenda.professionalenglishgdl.com
+    – /bin/cp  -r * $DEPLOYPATH

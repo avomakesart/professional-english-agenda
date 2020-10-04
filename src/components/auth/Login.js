@@ -39,7 +39,7 @@ export const Login = () => {
   };
 
   return (
-    <LayoutContent bread="Inciar Sesión" selected="3">
+    <LayoutContent bread="Iniciar Sesión" selected="3">
       {!loading ? (
         <Form
           name="normal_login"
@@ -75,7 +75,7 @@ export const Login = () => {
               },
             ]}
           >
-            <Input
+            <Input.Password
               prefix={<LockOutlined className="site-form-item-icon" />}
               type="password"
               name="password"
@@ -86,7 +86,7 @@ export const Login = () => {
           </Form.Item>
 
           <Form.Item>
-            {username && password !== "" ? (
+            {username && password.length > 5 ? (
               <Button
                 type="primary"
                 htmlType="submit"
@@ -105,7 +105,7 @@ export const Login = () => {
                 Log in
               </Button>
             )}
-            Or <Link to="/registrar">registrate!</Link>
+            ¿No tienes una cuenta? <Link to="/registrar">Registrate!</Link>
           </Form.Item>
         </Form>
       ) : (
